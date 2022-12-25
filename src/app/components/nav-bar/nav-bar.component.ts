@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,8 +10,11 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavBarComponent {
   items!: MenuItem[];
+  user!: firebase.User;
+  manage!: MenuItem[];
+  login!: MenuItem[];
 
-  ngOnInit() {
+  constructor(private afAuth: AngularFireAuth) {
     this.items = [
       {
         label: 'products',
@@ -21,11 +26,14 @@ export class NavBarComponent {
         icon: 'pi pi-shopping-bag',
         routerLink: '/shopping-cart',
       },
-      {
-        label: 'login',
-        icon: 'pi pi-sign-in',
-        routerLink: '/login',
-      },
+    ];
+
+    this.afAuth.authState.subscribe((user: any) => {
+      this.user = user;
+      console.log(user);
+    });
+
+    this.manage = [
       {
         label: 'manage',
         icon: 'pi pi-cog',
@@ -48,9 +56,23 @@ export class NavBarComponent {
           {
             label: 'Log Out',
             icon: 'pi pi-sign-out',
+            command: () => this.logOut(),
           },
         ],
       },
     ];
+    this.login = [
+      {
+        label: 'login',
+        icon: 'pi pi-shopping-bag',
+        routerLink: '/login',
+      },
+    ];
+  }
+
+  ngOnInit() {}
+
+  logOut() {
+    this.afAuth.signOut();
   }
 }

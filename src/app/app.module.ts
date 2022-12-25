@@ -14,6 +14,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+import { MegaMenuItem } from 'primeng/api';
 
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -52,6 +55,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
     MenubarModule,
     InputTextModule,
     ButtonModule,
+    MenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

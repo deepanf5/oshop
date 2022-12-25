@@ -2,7 +2,10 @@
   <ng-template pTemplate="start">
     <img src="assets/logo.png" height="40" class="mr-2" />
   </ng-template>
-  <ng-template pTemplate="end">
-    <input type="text" pInputText placeholder="Search" />
+  <ng-template pTemplate="end" class="action">
+    <p-menubar *ngIf="!user" class="dropdown" [model]="login"></p-menubar>
+    <p-menubar *ngIf="user" class="dropdown" [model]="manage"></p-menubar>
   </ng-template>
 </p-menubar>
+
+<h1 *ngIf="user">welcome {{ user.displayName }}</h1>
