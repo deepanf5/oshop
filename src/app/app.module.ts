@@ -1,5 +1,7 @@
+import { AuthService } from './services/auth/auth.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +30,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { AuthGuardService } from './services/guard/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     AngularFireModule.initializeApp(environment.firebase),
     provideAuth(() => getAuth()),
@@ -57,7 +62,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
     ButtonModule,
     MenuModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

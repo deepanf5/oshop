@@ -9,6 +9,7 @@ import { OrderSuccessComponent } from './components/order-success/order-success.
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { AuthGuardService } from './services/guard/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -26,14 +27,17 @@ const routes: Routes = [
   {
     path: 'myOrders',
     component: MyOrdersComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'check-out',
     component: CheckOutComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'order-success',
     component: OrderSuccessComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
@@ -44,10 +48,12 @@ const routes: Routes = [
   {
     path: 'admin/products',
     component: AdminProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
+    canActivate: [AuthGuardService],
   },
 ];
 
